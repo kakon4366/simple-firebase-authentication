@@ -1,11 +1,17 @@
 import "./App.css";
 import app from "./firebase.init";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+	FacebookAuthProvider,
+	getAuth,
+	GoogleAuthProvider,
+	signInWithPopup,
+} from "firebase/auth";
 
 const auth = getAuth(app);
 
 function App() {
 	const provider = new GoogleAuthProvider();
+	const providerFacebook = new FacebookAuthProvider();
 
 	const handleGoogleAuth = () => {
 		signInWithPopup(auth, provider)
@@ -13,12 +19,22 @@ function App() {
 				const user = result.user;
 				console.log(user);
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => console.error(error));
+	};
+
+	const handleFacebookAuth = () => {
+		signInWithPopup(auth, providerFacebook)
+			.then((result) => {
+				const user = result.user;
+				console.log(user);
+			})
+			.catch((error) => console.error(error));
 	};
 
 	return (
 		<div className="App">
-			<button onClick={handleGoogleAuth}>Google</button>
+			<button onClick={handleGoogleAuth}>Google Log In</button>
+			<button onClick={handleFacebookAuth}>Faceboon Log In</button>
 		</div>
 	);
 }
