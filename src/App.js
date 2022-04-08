@@ -24,6 +24,7 @@ function App() {
 	const [success, setSuccess] = useState("");
 	const [error, setError] = useState("");
 	const [messageOut, setmessageOut] = useState(false);
+	const [registred, setRegistred] = useState(false);
 
 	const [user, setUser] = useState({});
 
@@ -121,6 +122,12 @@ function App() {
 		e.preventDefault();
 	};
 
+	// user manage handler
+	const userManageHandler = (e) => {
+		registred ? setRegistred(false) : setRegistred(true);
+		e.preventDefault();
+	};
+
 	return (
 		<div className="App">
 			<div className="sign-up-area">
@@ -138,20 +145,22 @@ function App() {
 				</div>
 				<span>Or</span>
 				<div className="signUp-form">
-					<h2>Register</h2>
+					{registred ? <h2>Login</h2> : <h2>Register</h2>}
 					<hr />
 					<form
 						onSubmit={userEmailPasswordHandler}
 						className="sign-up-form"
 					>
-						<div className="form-control">
-							<label htmlFor="full-name">Full Name:</label>
-							<input
-								onBlur={handleName}
-								type="text"
-								placeholder="Full Name"
-							/>
-						</div>
+						{registred || (
+							<div className="form-control">
+								<label htmlFor="full-name">Full Name:</label>
+								<input
+									onBlur={handleName}
+									type="text"
+									placeholder="Full Name"
+								/>
+							</div>
+						)}
 						<div className="form-control">
 							<label htmlFor="email">E-mail Address:</label>
 							<input
@@ -168,14 +177,16 @@ function App() {
 								placeholder="Password"
 							/>
 						</div>
-						<div className="form-control">
-							<label htmlFor="con-password">Confirm Password:</label>
-							<input
-								onBlur={handleConPassword}
-								type="password"
-								placeholder="Confirm Password"
-							/>
-						</div>
+						{registred || (
+							<div className="form-control">
+								<label htmlFor="con-password">Confirm Password:</label>
+								<input
+									onBlur={handleConPassword}
+									type="password"
+									placeholder="Confirm Password"
+								/>
+							</div>
+						)}
 						<p style={{ color: "green" }}>{success}</p>
 						<p style={{ color: "darkred" }}>{error}</p>
 						<input
@@ -185,7 +196,16 @@ function App() {
 						/>
 						<div>
 							<p>
-								All ready registred?<a href="/">Log in</a>
+								All ready registred?
+								{registred ? (
+									<a onClick={userManageHandler} href="/">
+										Register
+									</a>
+								) : (
+									<a onClick={userManageHandler} href="/">
+										Log in
+									</a>
+								)}
 							</p>
 						</div>
 					</form>
