@@ -2,7 +2,6 @@ import "./App.css";
 import googlePhoto from "./images/google.png";
 import facebookPhoto from "./images/facebook.png";
 import githubPhoto from "./images/github.png";
-
 import app from "./firebase.init";
 import {
 	FacebookAuthProvider,
@@ -10,16 +9,19 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 } from "firebase/auth";
+import { useState } from "react";
 
 const auth = getAuth(app);
 
 function App() {
+	const [user, setUser] = useState({});
+
 	const handleGoogleAuth = () => {
 		const googleProvider = new GoogleAuthProvider();
 		signInWithPopup(auth, googleProvider)
 			.then((result) => {
 				const user = result.user;
-				console.log(user);
+				setUser(user);
 			})
 			.catch((error) => console.error(error));
 	};
@@ -56,9 +58,14 @@ function App() {
 				</div>
 			</div>
 			<div className="user-details-area">
-				<img src="" alt="" />
-				<h2>Name: </h2>
-				<p>E-mail: </p>
+				<div className="user-photo">
+					<img src={user.photoURL} alt="" />
+				</div>
+				<div className="user-details">
+					<h2>Name: {user.displayName}</h2>
+					<p>E-mail: {user.email}</p>
+					<button className="details-btn">More Details</button>
+				</div>
 			</div>
 		</div>
 	);

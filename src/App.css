@@ -51,4 +51,28 @@
   margin: 20px;
   padding: 20px;
   border-radius: 8px;
+  display: flex;
+}
+.user-photo{
+  width: 150px;
+  height: 150px;
+}
+.user-photo img{
+  width: 100%;
+}
+.user-details{
+  margin-left: 20px;
+}
+
+.details-btn{
+  padding: 12px 24px;
+  border-radius: 3px;
+  background-color: rgb(74, 74, 244);
+  border: none;
+  color: white;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.details-btn:hover {
+  background-color: rgb(44, 44, 243);
 }
