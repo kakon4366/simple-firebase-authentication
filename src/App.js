@@ -77,6 +77,34 @@ function App() {
 				<div className="signUp-form">
 					<h2>Register</h2>
 					<hr />
+					<form action="" className="sign-up-form">
+						<div className="form-control">
+							<label htmlFor="full-name">Full Name:</label>
+							<input type="text" placeholder="Full Name" />
+						</div>
+						<div className="form-control">
+							<label htmlFor="email">E-mail Address:</label>
+							<input type="email" placeholder="E-mail Address" />
+						</div>
+						<div className="form-control">
+							<label htmlFor="password">Password:</label>
+							<input type="password" placeholder="Password" />
+						</div>
+						<div className="form-control">
+							<label htmlFor="con-password">Confirm Password:</label>
+							<input type="password" placeholder="Confirm Password" />
+						</div>
+						<input
+							className="details-btn"
+							type="submit"
+							value="Register"
+						/>
+						<div>
+							<p>
+								All ready registred?<a href="/">Log in</a>
+							</p>
+						</div>
+					</form>
 				</div>
 			</div>
 			{user.uid && (

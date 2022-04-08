@@ -34,11 +34,12 @@
   font-weight: 700;
 }
 .signUp-form{
-  background-color: antiquewhite;
+  background-color: #F0F8FF;
   width: 70%;
   margin: 20px;
   padding: 20px;
   border-radius: 8px;
+  border: 2px solid #abb1b7;
 }
 .signUp-form h2{
   text-align: center;
@@ -72,7 +73,34 @@
   color: white;
   transition: all 0.3s;
   cursor: pointer;
+  font-size: 18px;
 }
 .details-btn:hover {
   background-color: rgb(44, 44, 243);
+}
+
+/* Sign up form design */
+
+.form-control{
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.form-control label{
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.form-control input{
+  font-size: 18px;
+  padding: 5px 8px;
+  background-color: #E5E5E5;
+  outline: none;
+  border: 1px solid rgb(44, 44, 243);
+  border-radius: 3px;
+  color: #1d1d1d;
+}
+.form-control input::placeholder{
+  color: #949494;
+  font-weight: 200;
 }
