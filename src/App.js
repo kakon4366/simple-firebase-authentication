@@ -4,6 +4,7 @@ import facebookPhoto from "./images/facebook.png";
 import githubPhoto from "./images/github.png";
 import app from "./firebase.init";
 import {
+	createUserWithEmailAndPassword,
 	FacebookAuthProvider,
 	getAuth,
 	GithubAuthProvider,
@@ -15,6 +16,15 @@ import { useState } from "react";
 const auth = getAuth(app);
 
 function App() {
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [conPassword, setConPassword] = useState("");
+
+	const [success, setSuccess] = useState("");
+	const [error, setError] = useState("");
+	const [messageOut, setmessageOut] = useState(false);
+
 	const [user, setUser] = useState({});
 
 	// google sign up
@@ -68,26 +78,46 @@ function App() {
 	// Name handler
 	const handleName = (e) => {
 		const name = e.target.value;
-		console.log(name);
+		setName(name);
 	};
 	// Email handler
 	const handleEmail = (e) => {
-		const name = e.target.value;
-		console.log(name);
+		const email = e.target.value;
+		setEmail(email);
 	};
 	// Password handler
 	const handlePassword = (e) => {
-		const name = e.target.value;
-		console.log(name);
+		const password = e.target.value;
+		setPassword(password);
 	};
 	// confirm password handler
 	const handleConPassword = (e) => {
-		const name = e.target.value;
-		console.log(name);
+		const conPassword = e.target.value;
+		setConPassword(conPassword);
 	};
 	// submit handler
 	const userEmailPasswordHandler = (e) => {
-		console.log("hahaha");
+		createUserWithEmailAndPassword(auth, email, password)
+			.then((result) => {
+				const user = result.user;
+				setUser(user);
+				console.log(user);
+				setSuccess("User Create Success!!!");
+				setError("");
+			})
+			.catch((error) => {
+				console.log(error);
+				setError("User Create Fail...!!!");
+				setSuccess("");
+			});
+
+		//time out message
+		if (user.uid) {
+			setInterval(() => {
+				setmessageOut(true);
+			}, 5000);
+		}
+
 		e.preventDefault();
 	};
 
@@ -146,6 +176,8 @@ function App() {
 								placeholder="Confirm Password"
 							/>
 						</div>
+						<p style={{ color: "green" }}>{success}</p>
+						<p style={{ color: "darkred" }}>{error}</p>
 						<input
 							className="details-btn"
 							type="submit"
