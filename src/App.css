@@ -1,4 +1,8 @@
-.App {
+.App{
+  max-width: 1024px;
+  margin: 0 auto;
+}
+.sign-up-area {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,15 +11,31 @@
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 30%;
   margin: 20px;
   padding: 20px;
   border: 2px solid rgb(121, 121, 248);
   border-radius: 8px;
 }
+.signUp-buttons button{
+  height: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 12px;
+  padding-left: 25px;
+}
+.signUp-buttons button img{
+  height: 28px;
+}
+.signUp-buttons button span{
+  margin-left: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
 .signUp-form{
   background-color: antiquewhite;
-  width: 300px;
+  width: 70%;
   margin: 20px;
   padding: 20px;
   border-radius: 8px;
@@ -24,5 +44,11 @@
   text-align: center;
   margin-top:0;
   margin-bottom: 0;
+}
 
+.user-details-area{
+  border: 2px solid rgb(121, 121, 248);
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
 }

@@ -1,4 +1,8 @@
 import "./App.css";
+import googlePhoto from "./images/google.png";
+import facebookPhoto from "./images/facebook.png";
+import githubPhoto from "./images/github.png";
+
 import app from "./firebase.init";
 import {
 	FacebookAuthProvider,
@@ -10,11 +14,9 @@ import {
 const auth = getAuth(app);
 
 function App() {
-	const provider = new GoogleAuthProvider();
-	const providerFacebook = new FacebookAuthProvider();
-
 	const handleGoogleAuth = () => {
-		signInWithPopup(auth, provider)
+		const googleProvider = new GoogleAuthProvider();
+		signInWithPopup(auth, googleProvider)
 			.then((result) => {
 				const user = result.user;
 				console.log(user);
@@ -23,6 +25,7 @@ function App() {
 	};
 
 	const handleFacebookAuth = () => {
+		// const providerFacebook = new FacebookAuthProvider();
 		// signInWithPopup(auth, providerFacebook)
 		// 	.then((result) => {
 		// 		const user = result.user;
@@ -33,14 +36,29 @@ function App() {
 
 	return (
 		<div className="App">
-			<div className="signUp-buttons">
-				<button onClick={handleGoogleAuth}>Google Log In</button>
-				<button onClick={handleFacebookAuth}>Faceboon Log In</button>
+			<div className="sign-up-area">
+				<div className="signUp-buttons">
+					<button onClick={handleGoogleAuth}>
+						<img src={googlePhoto} alt="" /> <span>Google Log In</span>
+					</button>
+					<button onClick={handleFacebookAuth}>
+						<img src={facebookPhoto} alt="" />{" "}
+						<span>Faceboon Log In</span>
+					</button>
+					<button onClick={handleFacebookAuth}>
+						<img src={githubPhoto} alt="" /> <span>Github Log In</span>
+					</button>
+				</div>
+				<span>Or</span>
+				<div className="signUp-form">
+					<h2>Register</h2>
+					<hr />
+				</div>
 			</div>
-			<span>Or</span>
-			<div className="signUp-form">
-				<h2>Register</h2>
-				<hr />
+			<div className="user-details-area">
+				<img src="" alt="" />
+				<h2>Name: </h2>
+				<p>E-mail: </p>
 			</div>
 		</div>
 	);
