@@ -24,7 +24,10 @@ function App() {
 				const user = result.user;
 				setUser(user);
 			})
-			.catch((error) => console.error(error));
+			.catch((error) => {
+				console.error(error);
+				setUser({});
+			});
 	};
 
 	const handleGithubAuth = () => {
@@ -36,17 +39,23 @@ function App() {
 				const user = result.user;
 				setUser(user);
 			})
-			.catch((error) => console.error("Error dice....so sad", error));
+			.catch((error) => {
+				console.error(error);
+				setUser({});
+			});
 	};
 
 	const handleFacebookAuth = () => {
-		// const providerFacebook = new FacebookAuthProvider();
-		// signInWithPopup(auth, providerFacebook)
-		// 	.then((result) => {
-		// 		const user = result.user;
-		// 		console.log(user);
-		// 	})
-		// 	.catch((error) => console.error(error));
+		const providerFacebook = new FacebookAuthProvider();
+		signInWithPopup(auth, providerFacebook)
+			.then((result) => {
+				const user = result.user;
+				setUser(user);
+			})
+			.catch((error) => {
+				console.error(error);
+				setUser({});
+			});
 	};
 
 	return (
@@ -70,16 +79,18 @@ function App() {
 					<hr />
 				</div>
 			</div>
-			<div className="user-details-area">
-				<div className="user-photo">
-					<img src={user.photoURL} alt="" />
+			{user.uid && (
+				<div className="user-details-area">
+					<div className="user-photo">
+						<img src={user.photoURL} alt="" />
+					</div>
+					<div className="user-details">
+						<h2>Name: {user.displayName}</h2>
+						<p>E-mail: {user.email}</p>
+						<button className="details-btn">More Details</button>
+					</div>
 				</div>
-				<div className="user-details">
-					<h2>Name: {user.displayName}</h2>
-					<p>E-mail: {user.email}</p>
-					<button className="details-btn">More Details</button>
-				</div>
-			</div>
+			)}
 		</div>
 	);
 }
