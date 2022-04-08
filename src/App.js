@@ -9,6 +9,7 @@ import {
 	getAuth,
 	GithubAuthProvider,
 	GoogleAuthProvider,
+	signInWithEmailAndPassword,
 	signInWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
@@ -98,19 +99,28 @@ function App() {
 	};
 	// submit handler
 	const userEmailPasswordHandler = (e) => {
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((result) => {
-				const user = result.user;
-				setUser(user);
-				console.log(user);
-				setSuccess("User Create Success!!!");
-				setError("");
-			})
-			.catch((error) => {
-				console.log(error);
-				setError("User Create Fail...!!!");
-				setSuccess("");
-			});
+		if (registred) {
+			signInWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					const user = userCredential.user;
+					setUser(user);
+				})
+				.catch(console.log(error));
+		} else {
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((result) => {
+					const user = result.user;
+					setUser(user);
+					console.log(user);
+					setSuccess("User Create Success!!!");
+					setError("");
+				})
+				.catch((error) => {
+					console.log(error);
+					setError("User Create Fail...!!!");
+					setSuccess("");
+				});
+		}
 
 		//time out message
 		if (user.uid) {
@@ -189,11 +199,19 @@ function App() {
 						)}
 						<p style={{ color: "green" }}>{success}</p>
 						<p style={{ color: "darkred" }}>{error}</p>
-						<input
-							className="details-btn"
-							type="submit"
-							value="Register"
-						/>
+						{registred ? (
+							<input
+								className="details-btn"
+								type="submit"
+								value="Log In"
+							/>
+						) : (
+							<input
+								className="details-btn"
+								type="submit"
+								value="Register"
+							/>
+						)}
 						<div>
 							<p>
 								All ready registred?
