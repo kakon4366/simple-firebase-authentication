@@ -23,18 +23,25 @@ function App() {
 	};
 
 	const handleFacebookAuth = () => {
-		signInWithPopup(auth, providerFacebook)
-			.then((result) => {
-				const user = result.user;
-				console.log(user);
-			})
-			.catch((error) => console.error(error));
+		// signInWithPopup(auth, providerFacebook)
+		// 	.then((result) => {
+		// 		const user = result.user;
+		// 		console.log(user);
+		// 	})
+		// 	.catch((error) => console.error(error));
 	};
 
 	return (
 		<div className="App">
-			<button onClick={handleGoogleAuth}>Google Log In</button>
-			<button onClick={handleFacebookAuth}>Faceboon Log In</button>
+			<div className="signUp-buttons">
+				<button onClick={handleGoogleAuth}>Google Log In</button>
+				<button onClick={handleFacebookAuth}>Faceboon Log In</button>
+			</div>
+			<span>Or</span>
+			<div className="signUp-form">
+				<h2>Register</h2>
+				<hr />
+			</div>
 		</div>
 	);
 }
