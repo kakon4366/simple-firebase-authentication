@@ -17,6 +17,7 @@ const auth = getAuth(app);
 function App() {
 	const [user, setUser] = useState({});
 
+	// google sign up
 	const handleGoogleAuth = () => {
 		const googleProvider = new GoogleAuthProvider();
 		signInWithPopup(auth, googleProvider)
@@ -30,6 +31,7 @@ function App() {
 			});
 	};
 
+	// github sign up
 	const handleGithubAuth = () => {
 		console.log("Clicked");
 		const githubProvider = new GithubAuthProvider();
@@ -45,6 +47,7 @@ function App() {
 			});
 	};
 
+	// facebook sign up
 	const handleFacebookAuth = () => {
 		const providerFacebook = new FacebookAuthProvider();
 		signInWithPopup(auth, providerFacebook)
@@ -56,6 +59,36 @@ function App() {
 				console.error(error);
 				setUser({});
 			});
+	};
+
+	/*
+	 * Email/password sign up
+	 */
+
+	// Name handler
+	const handleName = (e) => {
+		const name = e.target.value;
+		console.log(name);
+	};
+	// Email handler
+	const handleEmail = (e) => {
+		const name = e.target.value;
+		console.log(name);
+	};
+	// Password handler
+	const handlePassword = (e) => {
+		const name = e.target.value;
+		console.log(name);
+	};
+	// confirm password handler
+	const handleConPassword = (e) => {
+		const name = e.target.value;
+		console.log(name);
+	};
+	// submit handler
+	const userEmailPasswordHandler = (e) => {
+		console.log("hahaha");
+		e.preventDefault();
 	};
 
 	return (
@@ -77,22 +110,41 @@ function App() {
 				<div className="signUp-form">
 					<h2>Register</h2>
 					<hr />
-					<form action="" className="sign-up-form">
+					<form
+						onSubmit={userEmailPasswordHandler}
+						className="sign-up-form"
+					>
 						<div className="form-control">
 							<label htmlFor="full-name">Full Name:</label>
-							<input type="text" placeholder="Full Name" />
+							<input
+								onBlur={handleName}
+								type="text"
+								placeholder="Full Name"
+							/>
 						</div>
 						<div className="form-control">
 							<label htmlFor="email">E-mail Address:</label>
-							<input type="email" placeholder="E-mail Address" />
+							<input
+								onBlur={handleEmail}
+								type="email"
+								placeholder="E-mail Address"
+							/>
 						</div>
 						<div className="form-control">
 							<label htmlFor="password">Password:</label>
-							<input type="password" placeholder="Password" />
+							<input
+								onBlur={handlePassword}
+								type="password"
+								placeholder="Password"
+							/>
 						</div>
 						<div className="form-control">
 							<label htmlFor="con-password">Confirm Password:</label>
-							<input type="password" placeholder="Confirm Password" />
+							<input
+								onBlur={handleConPassword}
+								type="password"
+								placeholder="Confirm Password"
+							/>
 						</div>
 						<input
 							className="details-btn"
