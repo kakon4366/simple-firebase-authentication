@@ -6,6 +6,7 @@ import app from "./firebase.init";
 import {
 	FacebookAuthProvider,
 	getAuth,
+	GithubAuthProvider,
 	GoogleAuthProvider,
 	signInWithPopup,
 } from "firebase/auth";
@@ -24,6 +25,18 @@ function App() {
 				setUser(user);
 			})
 			.catch((error) => console.error(error));
+	};
+
+	const handleGithubAuth = () => {
+		console.log("Clicked");
+		const githubProvider = new GithubAuthProvider();
+		signInWithPopup(auth, githubProvider)
+			.then((result) => {
+				console.log("sob thik ache re...");
+				const user = result.user;
+				setUser(user);
+			})
+			.catch((error) => console.error("Error dice....so sad", error));
 	};
 
 	const handleFacebookAuth = () => {
@@ -47,7 +60,7 @@ function App() {
 						<img src={facebookPhoto} alt="" />{" "}
 						<span>Faceboon Log In</span>
 					</button>
-					<button onClick={handleFacebookAuth}>
+					<button onClick={handleGithubAuth}>
 						<img src={githubPhoto} alt="" /> <span>Github Log In</span>
 					</button>
 				</div>
