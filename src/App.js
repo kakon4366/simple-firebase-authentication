@@ -11,6 +11,8 @@ import {
 	GoogleAuthProvider,
 	signInWithEmailAndPassword,
 	signInWithPopup,
+	signOut,
+	updateProfile,
 } from "firebase/auth";
 import { useState } from "react";
 
@@ -110,6 +112,8 @@ function App() {
 			createUserWithEmailAndPassword(auth, email, password)
 				.then((result) => {
 					const user = result.user;
+					//update profile
+					updateProfileHandler();
 					setUser(user);
 					console.log(user);
 					setSuccess("User Create Success!!!");
@@ -130,6 +134,28 @@ function App() {
 		}
 
 		e.preventDefault();
+	};
+
+	// update profile handler
+	const updateProfileHandler = () => {
+		console.log("asce ai block a....");
+		updateProfile(auth.currentUser, { displayName: name })
+			.then(() => {
+				console.log("update success");
+			})
+			.catch((error) => console.log("error dice re....", error));
+	};
+
+	//sign out handler
+	const userSingOutHandler = () => {
+		signOut(auth)
+			.then(() => {
+				console.log("sing out success");
+				setUser({});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	// user manage handler
@@ -235,6 +261,9 @@ function App() {
 						<img src={user.photoURL} alt="" />
 					</div>
 					<div className="user-details">
+						<button onClick={userSingOutHandler} className="sign-out-btn">
+							singout
+						</button>
 						<h2>Name: {user.displayName}</h2>
 						<p>E-mail: {user.email}</p>
 						<button className="details-btn">More Details</button>
