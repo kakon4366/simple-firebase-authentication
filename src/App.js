@@ -2,6 +2,7 @@ import "./App.css";
 import googlePhoto from "./images/google.png";
 import facebookPhoto from "./images/facebook.png";
 import githubPhoto from "./images/github.png";
+import avatar from "./images/avatar.jpg";
 import app from "./firebase.init";
 import {
 	createUserWithEmailAndPassword,
@@ -258,7 +259,7 @@ function App() {
 			{user.uid && (
 				<div className="user-details-area">
 					<div className="user-photo">
-						<img src={user.photoURL} alt="" />
+						<img src={user.photoURL ? user.photoURL : avatar} alt="" />
 					</div>
 					<div className="user-details">
 						<button onClick={userSingOutHandler} className="sign-out-btn">
